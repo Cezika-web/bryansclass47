@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Resumo Pós-Aula — Bryan — CZK English</title>
+
+  <style>
+    :root{
+      --page-bg: #f4f7fa;
+      --card-bg: #fff;
+      --accent: #2f86e6;
+      --accent-dark: #1f6fd1;
+      --green: #36b37e;
+      --muted: #6b7280;
+      --border: #e6eef8;
+      --box-radius: 12px;
+      --card-width: 720px;
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      padding:0;
+      background:var(--page-bg);
+      font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    .wrap{
+      min-height:100%;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:48px 20px;
+    }
+
+    .card{
+      width:100%;
+      max-width:var(--card-width);
+      background:var(--card-bg);
+      border-radius:18px;
+      padding:28px;
+      box-shadow:0 6px 22px rgba(33,47,60,0.06);
+      border:1px solid rgba(15,33,64,0.03);
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      margin-bottom:8px;
+    }
+
+    .badge{
+      background:linear-gradient(180deg,#fff,#f2fbff);
+      border:1px solid var(--border);
+      padding:8px 12px;
+      border-radius:999px;
+      color:var(--accent);
+      font-weight:700;
+      font-size:0.85rem;
+    }
+
+    h1{
+      margin:0;
+      font-size:1.3rem;
+      color:#0f1724;
+    }
+
+    .meta{
+      color:var(--muted);
+      font-size:0.92rem;
+      margin-top:6px;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:10px;
+      border:none;
+      background:var(--accent);
+      color:#fff;
+      text-decoration:none;
+      font-weight:600;
+      cursor:pointer;
+      box-shadow:0 6px 14px rgba(47,134,230,0.12);
+    }
+
+    .btn.secondary{
+      background:#fff;
+      color:var(--accent);
+      border:1px solid var(--border);
+      box-shadow:none;
+    }
+
+    main{margin-top:18px;}
+    section{margin-top:18px;}
+
+    .panel{
+      background:#fbfdff;
+      border-radius:12px;
+      padding:16px;
+      border:1px solid var(--border);
+    }
+
+    .outline-card{
+      border-radius:10px;
+      border:1px solid var(--border);
+      padding:16px;
+      background:#fff;
+    }
+
+    /* Vocabulary boxes */
+    .vocab-grid{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .vocab{
+      flex:1;
+      min-width:220px;
+      border-radius:10px;
+      padding:14px;
+      border:2px solid #dfeefe;
+      background:#fff;
+    }
+
+    .vocab.green{
+      border-color:#c9f3dc;
+      background:#f5fff6;
+    }
+
+    .vocab h3{
+      margin:0;
+      font-size:1rem;
+      color:#154360;
+    }
+
+    .vocab p{
+      margin:8px 0 0 0;
+      color:var(--muted);
+      font-size:0.95rem;
+    }
+
+    /* Transcrição / gravação buttons */
+    .media-row{
+      display:flex;
+      gap:14px;
+      margin-top:12px;
+      flex-wrap:wrap;
+    }
+
+    .media-btn{
+      background:#fff;
+      border:1px solid var(--border);
+      padding:12px 16px;
+      border-radius:10px;
+      font-weight:700;
+      color:var(--accent);
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      min-width:200px;
+      justify-content:center;
+    }
+
+    /* Homework box */
+    .homework{
+      background:#f3fff6;
+      border:1px solid #d7f5df;
+      border-radius:10px;
+      padding:14px;
+      margin-top:10px;
+    }
+
+    /* ===== TALK TIME – TABELA RETANGULAR ===== */
+    .speaking{
+      margin-top:18px;
+      padding:16px;
+      border-radius:12px;
+      background:linear-gradient(180deg,#ffffff,#fbfdff);
+      border:1px solid var(--border);
+      max-width:640px;
+    }
+
+    .speaking h2{
+      margin:0 0 10px 0;
+      font-size:1.05rem;
+      color:#0f1724;
+    }
+
+    .talk-table{
+      width:100%;
+      border-collapse:collapse;
+      border-radius:10px;
+      overflow:hidden;
+      background:#fff;
+      border:1px solid #e1e9f5;
+      font-size:0.9rem;
+    }
+
+    .talk-table th,
+    .talk-table td{
+      padding:8px 10px;
+      text-align:left;
+    }
+
+    .talk-table th{
+      background:#eef4ff;
+      color:#1b3556;
+      font-weight:700;
+      border-bottom:1px solid #dde6fa;
+    }
+
+    .row-teacher{
+      background:#e7f2ff; /* azul clarinho */
+    }
+
+    .row-student{
+      background:#e8f7ef; /* verde clarinho */
+    }
+
+    .talk-label{
+      font-weight:700;
+    }
+
+    .talk-percent{
+      font-weight:700;
+      color:#0f1724;
+    }
+
+    .talk-time{
+      color:var(--muted);
+    }
+
+    footer{
+      margin-top:20px;
+      color:var(--muted);
+      font-size:0.9rem;
+      text-align:center;
+    }
+
+    /* responsive */
+    @media (max-width:720px){
+      .card{padding:18px;border-radius:14px;}
+      .vocab-grid{flex-direction:column;}
+      .media-row{flex-direction:column;}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <article class="card" role="main">
+      <header>
+        <div>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <span class="badge">PÓS-AULA</span>
+            <h1>Revisão — Convites, eventos, direções e passado simples</h1>
+          </div>
+          <div class="meta" style="margin-top:8px;">
+            <strong>Professor:</strong> César &nbsp;•&nbsp;
+            <strong>Aluno:</strong> Bryan &nbsp;•&nbsp;
+            <strong>Data:</strong> 07/04/2026
+          </div>
+        </div>
+
+        <div class="actions">
+          <a class="btn" href="#" onclick="window.print();return false;">Imprimir / Salvar PDF</a>
+        </div>
+      </header>
+
+      <main>
+        <section class="panel">
+          <p style="margin:0;font-weight:600;color:#08325a;">
+            Revisão de passado simples, uso de <em>in / on / at</em>, convites para eventos, perguntas de informação e direções.
+          </p>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Resumo da Aula</h2>
+          <div class="outline-card">
+            <p style="margin:0 0 8px 0;">
+              Nesta aula, começamos retomando a conversa sobre o dia do Bryan e o professor aproveitou esse momento para introduzir uma correção importante: quando ele fala sobre algo que <strong>já aconteceu</strong>, precisa começar a usar verbos no <strong>passado simples</strong>. Por isso, frases como <em>I went to my sister’s home</em> e <em>I had lunch</em> foram trabalhadas para substituir construções no presente. Também foi destacada a diferença entre <strong>lunch = almoço</strong> e a ideia de “lanche”, mostrando que <em>lunch</em> é um substantivo e precisa de um verbo, como <em>have lunch</em> ou <em>eat lunch</em>.
+            </p>
+            <p style="margin:0 0 8px 0;">
+              Depois, a aula entrou em uma revisão mais ampla de linguagem para <strong>fazer convites</strong>, <strong>aceitar ou recusar</strong> e <strong>pedir informações</strong> sobre eventos. Bryan revisou estruturas como <em>Would you like to go...?</em>, <em>There is a play at the theater</em>, <em>What time is the game?</em> e respostas como <em>Sounds great</em>, <em>See you then</em>, <em>I’d love to, but...</em> e <em>That’s past my bedtime</em>. O foco foi não só lembrar a tradução, mas usar cada frase na situação certa.
+            </p>
+            <p style="margin:0 0 8px 0;">
+              Na parte principal, vocês analisaram uma página com eventos do <strong>Grand Park</strong> e praticaram como convidar alguém para uma peça, exposição ou palestra, falando <strong>nome do evento</strong>, <strong>dia</strong>, <strong>horário</strong> e <strong>local</strong>. Nesse momento, apareceu bastante o uso de <strong>on</strong> para datas e dias, <strong>at</strong> para horários específicos e <strong>from... to...</strong> para intervalos de tempo. Também foi reforçado que, ao falar de eventos, é melhor mencionar o <strong>evento</strong> em si, não apenas a pessoa ou o lugar.
+            </p>
+            <p style="margin:0;">
+              Por fim, vocês revisaram <strong>direções e localização</strong>, com expressões como <em>go to the corner of...</em>, <em>turn left</em>, <em>go ahead</em>, <em>across from</em> e <em>on the left</em>. O professor já adiantou que esse conteúdo vai continuar aparecendo nas próximas aulas e na área do aluno, justamente para repetir bastante e consolidar de vez os tópicos de <em>in / on / at</em>, eventos e direções.
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Key Vocabulary</h2>
+          <div class="vocab-grid">
+            <div class="vocab">
+              <h3>Had lunch</h3>
+              <p style="margin-top:8px;font-size:0.92rem;color:var(--muted);">
+                <em>(pt) almocei / almoçou</em><br>
+                <small>I had lunch at my sister’s home.</small>
+              </p>
+            </div>
+            <div class="vocab green">
+              <h3>Go to the corner of...</h3>
+              <p style="margin-top:8px;font-size:0.92rem;color:var(--muted);">
+                <em>(pt) vá até a esquina de...</em><br>
+                <small>Go to the corner of Monroe Street and Columbus Drive.</small>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Vocabulário da aula</h2>
+          <div class="outline-card">
+            <h3 style="margin-top:0;">Passado simples e rotina</h3>
+            <ul>
+              <li><strong>went</strong> – foi / fui (passado de <em>go</em>)</li>
+              <li><strong>ate</strong> – comeu / comi (passado de <em>eat</em>)</li>
+              <li><strong>had lunch</strong> – almoçou / almocei</li>
+              <li><strong>midday</strong> – meio-dia</li>
+              <li><strong>sister’s home</strong> – casa da irmã</li>
+            </ul>
+
+            <h3>Convites e respostas</h3>
+            <ul>
+              <li><strong>invite</strong> – convidar</li>
+              <li><strong>Would you like to go...?</strong> – Você gostaria de ir...?</li>
+              <li><strong>There is a play at the theater.</strong> – Tem uma peça no teatro.</li>
+              <li><strong>What time is the game?</strong> – Que horas é o jogo?</li>
+              <li><strong>Where is the theater?</strong> – Onde fica o teatro?</li>
+              <li><strong>Sounds great.</strong> – Parece ótimo.</li>
+              <li><strong>See you then.</strong> – Te vejo então.</li>
+              <li><strong>That’s more my style.</strong> – Isso é mais o meu estilo.</li>
+              <li><strong>I’d love to, but...</strong> – Eu adoraria, mas...</li>
+              <li><strong>That’s past my bedtime.</strong> – Isso é depois do meu horário de dormir.</li>
+              <li><strong>Maybe another time.</strong> – Talvez outra hora.</li>
+            </ul>
+
+            <h3>Eventos e locais</h3>
+            <ul>
+              <li><strong>play</strong> – peça</li>
+              <li><strong>exhibit / exhibition</strong> – exposição</li>
+              <li><strong>talk</strong> – palestra</li>
+              <li><strong>concert</strong> – concerto / show</li>
+              <li><strong>theater</strong> – teatro</li>
+              <li><strong>museum</strong> – museu</li>
+              <li><strong>Grand Park</strong> – Grand Park</li>
+              <li><strong>Our Town</strong> – <em>Our Town</em> (nome da peça)</li>
+              <li><strong>wildlife photography</strong> – fotografia da vida selvagem</li>
+              <li><strong>cellist</strong> – violoncelista</li>
+            </ul>
+
+            <h3>Direções e localização</h3>
+            <ul>
+              <li><strong>go to the corner of...</strong> – vá até a esquina de...</li>
+              <li><strong>turn left</strong> – vire à esquerda</li>
+              <li><strong>turn right</strong> – vire à direita</li>
+              <li><strong>go ahead</strong> – siga em frente</li>
+              <li><strong>one block</strong> – um quarteirão</li>
+              <li><strong>across from</strong> – em frente a / do outro lado de</li>
+              <li><strong>on the left</strong> – à esquerda</li>
+            </ul>
+
+            <h3>Preposições e tempo</h3>
+            <ul>
+              <li><strong>at</strong> – usado com horas e lugares específicos</li>
+              <li><strong>on</strong> – usado com dias e datas</li>
+              <li><strong>in</strong> – usado com cidades, países, meses e períodos mais gerais</li>
+              <li><strong>from... to...</strong> – de... até...</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Frases modelo da aula</h2>
+          <div class="outline-card">
+            <ul>
+              <li>I went to my sister’s home and had lunch.</li>
+              <li>Would you like to go to the theater?</li>
+              <li>There is a play at the theater.</li>
+              <li>What time is the game?</li>
+              <li>Where is the theater?</li>
+              <li>Sounds great.</li>
+              <li>See you then.</li>
+              <li>I’d love to, but I’m busy on Saturday.</li>
+              <li>That’s past my bedtime.</li>
+              <li>Go to the corner of Monroe Street and Columbus Drive.</li>
+              <li>Turn left and the theater is on the left.</li>
+              <li>On June 9 at midday.</li>
+              <li>From 9 a.m. to 5 p.m.</li>
+              <li>The play’s name is <em>Our Town</em>.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Correções importantes</h2>
+          <div class="outline-card">
+            <ul>
+              <li><strong>Passado de go:</strong> em vez de <em>I am go</em> ou <em>I want</em>, o correto é <strong>I went</strong>.</li>
+              <li><strong>Lunch ≠ lanche:</strong> <em>lunch</em> significa <strong>almoço</strong>, não “lanche”.</li>
+              <li><strong>Lunch precisa de verbo:</strong> não existe “passado de lunch”. O correto é <strong>ate lunch</strong> ou <strong>had lunch</strong>.</li>
+              <li><strong>Preposição com casa da irmã:</strong> em vez de <em>ate lunch to my sister’s home</em>, o ideal é <strong>had lunch at my sister’s home</strong>.</li>
+              <li><strong>Invite com verbo completo:</strong> em vez de <em>Would you like to my home?</em>, use <strong>Would you like to go to my home?</strong> ou outra ação clara.</li>
+              <li><strong>Evento x pessoa:</strong> em vez de falar só <em>There is a singer at midnight</em>, prefira falar o evento: <strong>There is a play at 7</strong> / <strong>There is a concert at 9</strong>.</li>
+              <li><strong>At, on, in:</strong> <strong>at</strong> para horários e lugares bem específicos, <strong>on</strong> para dias e datas, <strong>in</strong> para cidade, mês, país e contextos mais amplos.</li>
+              <li><strong>Thursday não é “five-th”:</strong> dias da semana precisam ser memorizados como palavras completas. <strong>Thursday = quinta-feira</strong>.</li>
+              <li><strong>From... to...</strong> é usado para intervalos: <strong>from 9 a.m. to 5 p.m.</strong>, não <em>at</em>.</li>
+              <li><strong>Apostrophe + s:</strong> para falar posse, o correto é <strong>The play’s name is Our Town</strong>.</li>
+              <li><strong>Direções:</strong> ao dar caminho, tente variar as estruturas, por exemplo: <strong>go ahead</strong>, <strong>go one block</strong>, <strong>turn left</strong>, <strong>across from</strong>.</li>
+              <li><strong>Pronúncia e forma:</strong> o professor chamou atenção várias vezes para não “engolir” partes da frase e sempre fechar a sentença com mais clareza e entonação.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Transcrição &amp; Gravação</h2>
+          <div class="media-row">
+            <a class="media-btn" href="#" role="button">📄 Acessar transcrição</a>
+
+            <a
+              class="media-btn"
+              href="https://youtu.be/rCXkGXcXsPs"
+              target="_blank"
+              rel="noopener noreferrer"
+              role="button"
+              style="background:linear-gradient(180deg,#1f6fd1,#2f86e6);color:#fff;border:none;min-width:260px;"
+            >
+              🎥 Assistir gravação (acesso privado)
+            </a>
+          </div>
+        </section>
+
+        <section class="speaking" aria-label="Distribuição de fala">
+          <h2>Tempo de Fala (Talk Time)</h2>
+          <table class="talk-table">
+            <thead>
+              <tr>
+                <th>Quem falou</th>
+                <th>Porcentagem</th>
+                <th>Duração aproximada</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-teacher">
+                <td><span class="talk-label">César (Professor)</span></td>
+                <td><span class="talk-percent">74%</span></td>
+                <td class="talk-time">~37 minutos</td>
+              </tr>
+              <tr class="row-student">
+                <td><span class="talk-label">Bryan</span></td>
+                <td><span class="talk-percent">26%</span></td>
+                <td class="talk-time">~13 minutos</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Homework</h2>
+          <div class="homework">
+            <p style="margin:0 0 8px 0;">
+              📌 <strong>Lição de casa (como combinado em aula):</strong>
+            </p>
+            <ul style="margin:0 0 6px 18px;padding:0;font-size:0.94rem;color:var(--muted);">
+              <li>Lembrar de ler o pós-aula de 2 a 3x na semana.</li>
+            </ul>
+          </div>
+
+          <div style="margin-top:14px;">
+            <a class="btn" href="https://wa.me" style="background:#25D366;border-radius:10px;box-shadow:none;">
+              💬 Falar comigo no WhatsApp
+            </a>
+          </div>
+        </section>
+
+      </main>
+
+      <footer>
+        <p style="margin:18px 0 0 0;color:var(--muted);font-size:0.9rem;">
+          © 2025 CZK English • Este conteúdo é exclusivo para fins educacionais. • Suporte: czkenglish@gmail.com
+        </p>
+      </footer>
+    </article>
+  </div>
+</body>
+</html>
